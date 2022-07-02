@@ -6,7 +6,6 @@ import (
 
 	"cloud.google.com/go/firestore"
 	firebase "firebase.google.com/go"
-	"google.golang.org/api/option"
 )
 
 type FirestoreService struct {
@@ -14,13 +13,11 @@ type FirestoreService struct {
 	ctx    context.Context
 }
 
-func NewFirestoreService(path string) *FirestoreService {
+func NewFirestoreService() *FirestoreService {
 
 	ctx := context.Background()
 
-	sa := option.WithCredentialsFile(path)
-
-	app, err := firebase.NewApp(ctx, nil, sa)
+	app, err := firebase.NewApp(ctx, nil)
 	if err != nil {
 		log.Fatalln(err)
 	}

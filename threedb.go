@@ -18,10 +18,10 @@ type Store struct {
 	firestore *pkg.FirestoreService
 }
 
-func NewThreeDB(driver string, path string) *Store {
+func NewThreeDB(driver string) *Store {
 
 	return &Store{
-		firestore: pkg.NewFirestoreService(path),
+		firestore: pkg.NewFirestoreService(),
 	}
 }
 
