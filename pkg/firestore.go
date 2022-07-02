@@ -67,9 +67,14 @@ func (s *FirestoreService) AddUserRecord(docID, value string) error {
 		return err
 	}
 
-	cleanerData := record.Data()["data"].([]interface{})
+	var cleanerData []interface{}
+	if record.Data()["data"] != nil {
+		cleanerData = record.Data()["data"].([]interface{})
 
-	cleanerData = append(cleanerData, value)
+		cleanerData = append(cleanerData, value)
+	} else {
+		cleanerData = append(cleanerData, value)
+	}
 
 	_, err = s.client.Collection("records").Doc(docID).Set(s.ctx, map[string]interface{}{
 		"data": cleanerData,
