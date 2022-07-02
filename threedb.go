@@ -2,9 +2,9 @@ package threedb
 
 import (
 	"errors"
-	"fmt"
 
 	"cloud.google.com/go/firestore"
+	"github.com/Niraj-Fonseka/threedb/pkg"
 )
 
 type ThreeDBInterface interface {
@@ -15,14 +15,13 @@ type ThreeDBInterface interface {
 }
 
 type Store struct {
-	firestore *FirestoreService
+	firestore *pkg.FirestoreService
 }
 
-func NewStore(driver string) *Store {
-	fmt.Println("Creating new store : ", driver)
+func NewThreeDB(driver string, path string) *Store {
 
 	return &Store{
-		firestore: NewFirestoreService(),
+		firestore: pkg.NewFirestoreService(path),
 	}
 }
 
